@@ -1,0 +1,36 @@
+{
+  "id": "ourapps-ae.rules-settings",
+  "name": "Rules settings",
+  "kind": "component",
+  "status": "example",
+  "package": "ourapps-ae/rules-settings",
+  "version": "0.3.0",
+  "ports": [
+    {
+      "id": "rules-settings",
+      "name": "Rules settings",
+      "direction": "output",
+      "kind": "interface",
+      "type": "ae/rules-settings",
+      "version": "1.0.0"
+    }
+  ],
+  "settings": [
+    {
+      "id": "rulesFile",
+      "name": "Rulesfile",
+      "type": "string",
+      "required": false,
+      "secret": false,
+      "default": "house-rules"
+    },
+    {
+      "id": "strict",
+      "name": "Strict",
+      "type": "boolean",
+      "required": false,
+      "secret": false,
+      "default": true
+    }
+  ]
+}

@@ -1,0 +1,226 @@
+{
+  "schema_version": 1,
+  "ruleset_id": "texas_holdem_house_rules_2026_10_18",
+  "game": "texas_holdem",
+  "format": "single_table_tournament",
+  "players": {
+    "minimum": 2,
+    "maximum": 9,
+    "seating": "random",
+    "late_registration": false,
+    "return_to_existing_stack_allowed": true
+  },
+  "chips": {
+    "starting_stack": "5000",
+    "minimum_unit": 1,
+    "integer_only": true,
+    "add_ons": false
+  },
+  "betting": {
+    "structure": "no_limit",
+    "standard_holdem_rules": true,
+    "standard_full_raise_and_short_all_in_rules": true,
+    "raise_count_cap": null,
+    "table_stakes": true,
+    "side_pots": true,
+    "minimum_opening_bet_big_blinds": 1,
+    "minimum_full_raise_increment": "last_full_valid_bet_or_raise_increment",
+    "short_all_in_exception": true
+  },
+  "blinds": {
+    "level_duration_seconds": 600,
+    "levels": [
+      {
+        "level": 1,
+        "small_blind": 25,
+        "big_blind": 50
+      },
+      {
+        "level": 2,
+        "small_blind": 50,
+        "big_blind": 100
+      },
+      {
+        "level": 3,
+        "small_blind": 75,
+        "big_blind": 150
+      },
+      {
+        "level": 4,
+        "small_blind": 100,
+        "big_blind": 200
+      },
+      {
+        "level": 5,
+        "small_blind": 150,
+        "big_blind": 300
+      },
+      {
+        "level": 6,
+        "small_blind": 200,
+        "big_blind": 400
+      },
+      {
+        "level": 7,
+        "small_blind": 300,
+        "big_blind": 600
+      },
+      {
+        "level": 8,
+        "small_blind": 400,
+        "big_blind": 800
+      },
+      {
+        "level": 9,
+        "small_blind": 600,
+        "big_blind": 1200
+      },
+      {
+        "level": 10,
+        "small_blind": 800,
+        "big_blind": 1600
+      },
+      {
+        "level": 11,
+        "small_blind": 1000,
+        "big_blind": 2000
+      },
+      {
+        "level": 12,
+        "small_blind": 1500,
+        "big_blind": 3000
+      },
+      {
+        "level": 13,
+        "small_blind": 2000,
+        "big_blind": 4000
+      },
+      {
+        "level": 14,
+        "small_blind": 3000,
+        "big_blind": 6000
+      },
+      {
+        "level": 15,
+        "small_blind": 4000,
+        "big_blind": 8000
+      },
+      {
+        "level": 16,
+        "small_blind": 6000,
+        "big_blind": 12000
+      }
+    ],
+    "after_last_level": {
+      "small_blind_multiplier_each_level": 2,
+      "big_blind_multiplier_each_level": 2
+    },
+    "ante": 0,
+    "first_button": "random",
+    "button_movement": "dead_button",
+    "clock_runs_during_normal_play": true,
+    "hand_uses_level_at_deal": true,
+    "new_hand_uses_current_clock_level": true
+  },
+  "rebuy": {
+    "maximum_per_player": 1,
+    "only_at_zero_chips_after_settlement": true,
+    "stack_awarded": 5000,
+    "eligibility": {
+      "basis": "hand_start_level",
+      "maximum_level": 3
+    },
+    "keep_seat": true,
+    "must_accept_immediate_offer": true,
+    "decision_seconds": 30,
+    "offer_timers_run_concurrently": true,
+    "pause_next_deal_and_level_clock_during_offer": true,
+    "decline_or_timeout": "eliminate",
+    "resolve_all_offers_before_champion_check": true
+  },
+  "showdown": {
+    "non_all_in": "auto_show_both_cards_all_non_folded_hands",
+    "all_in": "show_all_non_folded_hands_when_all_betting_finished",
+    "all_in_requires_at_least_two_non_folded_hands": true,
+    "wait_until_side_pot_betting_complete": true,
+    "muck_option": false,
+    "uncontested_winner_required_to_show": false,
+    "runouts": 1,
+    "voluntary_show": {
+      "enabled": true,
+      "own_cards_only": true,
+      "one_or_both": true,
+      "public_to_table": true,
+      "only_after_hand_ends": true
+    },
+    "rabbit_hunting": false
+  },
+  "pots": {
+    "return_uncalled_excess": true,
+    "split_each_pot_independently": true,
+    "tie_break_by_suit": false,
+    "odd_chips": "one_each_to_tied_winners_clockwise_after_button"
+  },
+  "timing": {
+    "decision_seconds": 30,
+    "time_bank_seconds": 0,
+    "timeout": "check_if_free_otherwise_fold",
+    "already_all_in_hand_remains_live": true
+  },
+  "absence": {
+    "normal_player_reconnect_pause_seconds": 0,
+    "first_missed_decision": "remaining_normal_decision_time_then_check_fold",
+    "later_absent_decisions": "immediate_check_fold",
+    "voluntary_sitout": "immediate_check_fold",
+    "continue_posting_blinds": true,
+    "keep_stack_and_seat": true,
+    "return_allowed_until_eliminated": true,
+    "already_all_in_hand_remains_live": true
+  },
+  "hosting_and_pauses": {
+    "host_role": "original_host_for_entire_session",
+    "host_transfer": false,
+    "host_absent": "pause_immediately_preserving_state",
+    "host_absent_freezes": [
+      "level_clock",
+      "action_countdown",
+      "rebuy_countdowns"
+    ],
+    "all_remaining_players_disconnected": "pause_preserving_state",
+    "automatic_pause_clears_only_when": "original_host_present_and_at_least_one_remaining_player_connected",
+    "manual_pause_resume": "original_host_only_between_hands",
+    "manual_pause_freezes": [
+      "level_clock",
+      "action_countdown",
+      "rebuy_countdowns"
+    ],
+    "pause_reasons_tracked_independently": true
+  },
+  "cancellation": {
+    "authority": "any_player_still_in_tournament",
+    "allowed_while_paused": true,
+    "immediate": true,
+    "current_hand": "void_and_restore_all_hand_contributions_including_blinds",
+    "completed_hand_history": "retain",
+    "terminal_status": "cancelled",
+    "winner": null,
+    "award_league_points": false,
+    "terminal_result_retroactive_cancellation": false
+  },
+  "results": {
+    "normal_completion": "one_player_with_chips_and_no_pending_eligible_rebuys",
+    "rank_by": "elimination_order",
+    "same_hand_bustouts": "larger_pre_hand_stack_ranks_higher",
+    "equal_pre_hand_stack_bustouts": "tie",
+    "successful_rebuy_is_elimination": false,
+    "tracking": "winner_and_finishing_positions",
+    "league_points": false,
+    "prize_pool_accounting": false
+  },
+  "references": {
+    "basic_game": "https://www.pokerstars.com/poker/games/texas-holdem/",
+    "standard_betting_and_button_procedures": "https://www.pokertda.com/view-poker-tda-rules/",
+    "simultaneous_elimination": "https://www.pokerstars.com/help/articles/rules-table-master/213164/",
+    "hand_rankings": "https://www.pokerstars.com/poker/games/rules/hand-rankings/"
+  }
+}

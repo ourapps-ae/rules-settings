@@ -1,0 +1,112 @@
+{
+  "id": "rules-settings",
+  "type": "ae/rules-settings",
+  "version": "1.0.0",
+  "operations": {
+    "parseRules": {
+      "arguments": [
+        "text:string",
+        "schema:Schema",
+        "options?:{strict?:boolean}"
+      ],
+      "returns": "{ok:true,rules}|{ok:false,problems:{path,message}[]} (rules deeply frozen)"
+    },
+    "validate": {
+      "arguments": [
+        "value:unknown",
+        "schema:Schema",
+        "options?:{strict?:boolean}"
+      ],
+      "returns": "Problem[] {path,message} (empty when valid; throws on an unusable schema)"
+    },
+    "schemaProblems": {
+      "arguments": [
+        "schema:Schema"
+      ],
+      "returns": "string[] (unsupported keyword, bad shape, unresolved $ref)"
+    },
+    "getRule": {
+      "arguments": [
+        "rules:unknown",
+        "path:string",
+        "fallback?:T"
+      ],
+      "returns": "T (throws when the path is missing and no fallback is given)"
+    },
+    "hasRule": {
+      "arguments": [
+        "rules:unknown",
+        "path:string"
+      ],
+      "returns": "boolean"
+    },
+    "ruleRows": {
+      "arguments": [
+        "rules:unknown",
+        "schema:Schema"
+      ],
+      "returns": "Row[] {path,value,description|null} for a rules page"
+    },
+    "deepFreeze": {
+      "arguments": [
+        "value:T"
+      ],
+      "returns": "T"
+    },
+    "loadRulesFile": {
+      "arguments": [
+        "rulesFile:string|URL",
+        "schemaFile?:string|URL",
+        "options?:{strict?:boolean}"
+      ],
+      "returns": "Parsed (server)"
+    },
+    "requireRules": {
+      "arguments": [
+        "rulesFile:string|URL",
+        "schemaFile?:string|URL",
+        "options?:{strict?:boolean}"
+      ],
+      "returns": "rules (throws with every problem listed; server)"
+    },
+    "readSchema": {
+      "arguments": [
+        "file?:string|URL"
+      ],
+      "returns": "Schema (default: the shipped envelope schema; server)"
+    },
+    "createRulesSettings": {
+      "arguments": [
+        "rules:unknown"
+      ],
+      "returns": "RulesReader {rules,value(path),has(path)} (web, server)"
+    },
+    "value": {
+      "arguments": [
+        "path:string"
+      ],
+      "returns": "unknown (the rule at the dotted path, undefined when the rules have none; a method of RulesReader)"
+    },
+    "has": {
+      "arguments": [
+        "path:string"
+      ],
+      "returns": "boolean (a method of RulesReader; same as hasRule)"
+    },
+    "rulesLocation": {
+      "arguments": [
+        "name?:string (slug, default house-rules)",
+        "folder?:string|URL (default rules)"
+      ],
+      "returns": "{rulesFile,schemaFile} (<folder>/<name>.json and <folder>/<name>.schema.json; RangeError unless name is a lower-case slug; server)"
+    },
+    "loadRulesSettings": {
+      "arguments": [
+        "settings?:{rulesFile?:string,strict?:boolean}",
+        "folder?:string|URL"
+      ],
+      "returns": "RulesReader (loads the named rules file and its schema, throws with every problem listed; server)"
+    }
+  },
+  "notes": "Engine form: `value(path)` over checked rules, from createRulesSettings(rules) or loadRulesSettings({rulesFile, strict}, folder). The `rulesFile` setting is a name (grammar slug, default house-rules), not a path: the rules are <folder>/<name>.json with their schema beside them as <folder>/<name>.schema.json, the folder being where the application installs its rules."
+}

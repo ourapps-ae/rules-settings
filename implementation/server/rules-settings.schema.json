@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "House rules file envelope",
+  "description": "What every rules file must have. A recipe adds its own sections by supplying a fuller schema; sections not listed here are allowed.",
+  "type": "object",
+  "required": ["schema_version", "ruleset_id", "game"],
+  "properties": {
+    "schema_version": { "type": "integer", "minimum": 1, "description": "Version of this rules file layout" },
+    "ruleset_id": { "type": "string", "pattern": "^[a-z0-9_]+$", "description": "Name of this rule set, stable across edits to the same rules" },
+    "game": { "type": "string", "minLength": 1, "description": "Which game the rules are for" }
+  }
+}

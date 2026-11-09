@@ -1,0 +1,650 @@
+{
+  "type": "object",
+  "required": [
+    "schema_version",
+    "ruleset_id",
+    "game",
+    "format",
+    "players",
+    "chips",
+    "betting",
+    "blinds",
+    "rebuy",
+    "showdown",
+    "pots",
+    "timing",
+    "absence",
+    "hosting_and_pauses",
+    "cancellation",
+    "results",
+    "references"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "ruleset_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9_]+$",
+      "description": "Name of this rule set, stable across edits to the same rules"
+    },
+    "game": {
+      "enum": [
+        "texas_holdem"
+      ]
+    },
+    "format": {
+      "enum": [
+        "single_table_tournament"
+      ]
+    },
+    "players": {
+      "type": "object",
+      "required": [
+        "minimum",
+        "maximum",
+        "seating",
+        "late_registration",
+        "return_to_existing_stack_allowed"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "minimum": {
+          "type": "integer",
+          "minimum": 2,
+          "maximum": 9,
+          "description": "Players needed to start"
+        },
+        "maximum": {
+          "type": "integer",
+          "minimum": 2,
+          "maximum": 9,
+          "description": "Seats at the table"
+        },
+        "seating": {
+          "enum": [
+            "random"
+          ],
+          "description": "How seats are given out"
+        },
+        "late_registration": {
+          "type": "boolean"
+        },
+        "return_to_existing_stack_allowed": {
+          "type": "boolean"
+        }
+      }
+    },
+    "chips": {
+      "type": "object",
+      "required": [
+        "starting_stack",
+        "minimum_unit",
+        "integer_only",
+        "add_ons"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "starting_stack": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Chips each player starts with"
+        },
+        "minimum_unit": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Smallest chip"
+        },
+        "integer_only": {
+          "type": "boolean"
+        },
+        "add_ons": {
+          "type": "boolean"
+        }
+      }
+    },
+    "betting": {
+      "type": "object",
+      "required": [
+        "structure",
+        "standard_holdem_rules",
+        "standard_full_raise_and_short_all_in_rules",
+        "raise_count_cap",
+        "table_stakes",
+        "side_pots",
+        "minimum_opening_bet_big_blinds",
+        "minimum_full_raise_increment",
+        "short_all_in_exception"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "structure": {
+          "enum": [
+            "no_limit"
+          ]
+        },
+        "standard_holdem_rules": {
+          "type": "boolean"
+        },
+        "standard_full_raise_and_short_all_in_rules": {
+          "type": "boolean"
+        },
+        "raise_count_cap": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1,
+          "description": "Raises allowed per round, null for no cap"
+        },
+        "table_stakes": {
+          "type": "boolean"
+        },
+        "side_pots": {
+          "type": "boolean"
+        },
+        "minimum_opening_bet_big_blinds": {
+          "type": "integer"
+        },
+        "minimum_full_raise_increment": {
+          "type": "string"
+        },
+        "short_all_in_exception": {
+          "type": "boolean"
+        }
+      }
+    },
+    "blinds": {
+      "type": "object",
+      "required": [
+        "level_duration_seconds",
+        "levels",
+        "after_last_level",
+        "ante",
+        "first_button",
+        "button_movement",
+        "clock_runs_during_normal_play",
+        "hand_uses_level_at_deal",
+        "new_hand_uses_current_clock_level"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "level_duration_seconds": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Length of one blind level"
+        },
+        "levels": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": [
+              "level",
+              "small_blind",
+              "big_blind"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "level": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "small_blind": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "big_blind": {
+                "type": "integer",
+                "minimum": 1
+              }
+            }
+          },
+          "description": "Blind levels in order"
+        },
+        "after_last_level": {
+          "type": "object",
+          "required": [
+            "small_blind_multiplier_each_level",
+            "big_blind_multiplier_each_level"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "small_blind_multiplier_each_level": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "big_blind_multiplier_each_level": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "Factor applied to both blinds for each level past the last listed"
+            }
+          }
+        },
+        "ante": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "first_button": {
+          "type": "string"
+        },
+        "button_movement": {
+          "type": "string"
+        },
+        "clock_runs_during_normal_play": {
+          "type": "boolean"
+        },
+        "hand_uses_level_at_deal": {
+          "type": "boolean"
+        },
+        "new_hand_uses_current_clock_level": {
+          "type": "boolean"
+        }
+      }
+    },
+    "rebuy": {
+      "type": "object",
+      "required": [
+        "maximum_per_player",
+        "only_at_zero_chips_after_settlement",
+        "stack_awarded",
+        "eligibility",
+        "keep_seat",
+        "must_accept_immediate_offer",
+        "decision_seconds",
+        "offer_timers_run_concurrently",
+        "pause_next_deal_and_level_clock_during_offer",
+        "decline_or_timeout",
+        "resolve_all_offers_before_champion_check"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "maximum_per_player": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "only_at_zero_chips_after_settlement": {
+          "type": "boolean"
+        },
+        "stack_awarded": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "eligibility": {
+          "type": "object",
+          "required": [
+            "basis",
+            "maximum_level"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "basis": {
+              "type": "string"
+            },
+            "maximum_level": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        },
+        "keep_seat": {
+          "type": "boolean"
+        },
+        "must_accept_immediate_offer": {
+          "type": "boolean"
+        },
+        "decision_seconds": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "offer_timers_run_concurrently": {
+          "type": "boolean"
+        },
+        "pause_next_deal_and_level_clock_during_offer": {
+          "type": "boolean"
+        },
+        "decline_or_timeout": {
+          "type": "string"
+        },
+        "resolve_all_offers_before_champion_check": {
+          "type": "boolean"
+        }
+      }
+    },
+    "showdown": {
+      "type": "object",
+      "required": [
+        "non_all_in",
+        "all_in",
+        "all_in_requires_at_least_two_non_folded_hands",
+        "wait_until_side_pot_betting_complete",
+        "muck_option",
+        "uncontested_winner_required_to_show",
+        "runouts",
+        "voluntary_show",
+        "rabbit_hunting"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "non_all_in": {
+          "type": "string"
+        },
+        "all_in": {
+          "type": "string"
+        },
+        "all_in_requires_at_least_two_non_folded_hands": {
+          "type": "boolean"
+        },
+        "wait_until_side_pot_betting_complete": {
+          "type": "boolean"
+        },
+        "muck_option": {
+          "type": "boolean"
+        },
+        "uncontested_winner_required_to_show": {
+          "type": "boolean"
+        },
+        "runouts": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "voluntary_show": {
+          "type": "object",
+          "required": [
+            "enabled",
+            "own_cards_only",
+            "one_or_both",
+            "public_to_table",
+            "only_after_hand_ends"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            },
+            "own_cards_only": {
+              "type": "boolean"
+            },
+            "one_or_both": {
+              "type": "boolean"
+            },
+            "public_to_table": {
+              "type": "boolean"
+            },
+            "only_after_hand_ends": {
+              "type": "boolean"
+            }
+          }
+        },
+        "rabbit_hunting": {
+          "type": "boolean"
+        }
+      }
+    },
+    "pots": {
+      "type": "object",
+      "required": [
+        "return_uncalled_excess",
+        "split_each_pot_independently",
+        "tie_break_by_suit",
+        "odd_chips"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "return_uncalled_excess": {
+          "type": "boolean"
+        },
+        "split_each_pot_independently": {
+          "type": "boolean"
+        },
+        "tie_break_by_suit": {
+          "type": "boolean"
+        },
+        "odd_chips": {
+          "enum": [
+            "one_each_to_tied_winners_clockwise_after_button"
+          ]
+        }
+      }
+    },
+    "timing": {
+      "type": "object",
+      "required": [
+        "decision_seconds",
+        "time_bank_seconds",
+        "timeout",
+        "already_all_in_hand_remains_live"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "decision_seconds": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Time a player has to act"
+        },
+        "time_bank_seconds": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "timeout": {
+          "enum": [
+            "check_if_free_otherwise_fold"
+          ],
+          "description": "What happens when the decision time runs out"
+        },
+        "already_all_in_hand_remains_live": {
+          "type": "boolean"
+        }
+      }
+    },
+    "absence": {
+      "type": "object",
+      "required": [
+        "normal_player_reconnect_pause_seconds",
+        "first_missed_decision",
+        "later_absent_decisions",
+        "voluntary_sitout",
+        "continue_posting_blinds",
+        "keep_stack_and_seat",
+        "return_allowed_until_eliminated",
+        "already_all_in_hand_remains_live"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "normal_player_reconnect_pause_seconds": {
+          "type": "integer"
+        },
+        "first_missed_decision": {
+          "type": "string"
+        },
+        "later_absent_decisions": {
+          "type": "string"
+        },
+        "voluntary_sitout": {
+          "type": "string"
+        },
+        "continue_posting_blinds": {
+          "type": "boolean"
+        },
+        "keep_stack_and_seat": {
+          "type": "boolean"
+        },
+        "return_allowed_until_eliminated": {
+          "type": "boolean"
+        },
+        "already_all_in_hand_remains_live": {
+          "type": "boolean"
+        }
+      }
+    },
+    "hosting_and_pauses": {
+      "type": "object",
+      "required": [
+        "host_role",
+        "host_transfer",
+        "host_absent",
+        "host_absent_freezes",
+        "all_remaining_players_disconnected",
+        "automatic_pause_clears_only_when",
+        "manual_pause_resume",
+        "manual_pause_freezes",
+        "pause_reasons_tracked_independently"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "host_role": {
+          "type": "string"
+        },
+        "host_transfer": {
+          "type": "boolean"
+        },
+        "host_absent": {
+          "type": "string"
+        },
+        "host_absent_freezes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "all_remaining_players_disconnected": {
+          "type": "string"
+        },
+        "automatic_pause_clears_only_when": {
+          "type": "string"
+        },
+        "manual_pause_resume": {
+          "type": "string"
+        },
+        "manual_pause_freezes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "pause_reasons_tracked_independently": {
+          "type": "boolean"
+        }
+      }
+    },
+    "cancellation": {
+      "type": "object",
+      "required": [
+        "authority",
+        "allowed_while_paused",
+        "immediate",
+        "current_hand",
+        "completed_hand_history",
+        "terminal_status",
+        "winner",
+        "award_league_points",
+        "terminal_result_retroactive_cancellation"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "authority": {
+          "type": "string"
+        },
+        "allowed_while_paused": {
+          "type": "boolean"
+        },
+        "immediate": {
+          "type": "boolean"
+        },
+        "current_hand": {
+          "type": "string"
+        },
+        "completed_hand_history": {
+          "type": "string"
+        },
+        "terminal_status": {
+          "type": "string"
+        },
+        "winner": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "award_league_points": {
+          "type": "boolean"
+        },
+        "terminal_result_retroactive_cancellation": {
+          "type": "boolean"
+        }
+      }
+    },
+    "results": {
+      "type": "object",
+      "required": [
+        "normal_completion",
+        "rank_by",
+        "same_hand_bustouts",
+        "equal_pre_hand_stack_bustouts",
+        "successful_rebuy_is_elimination",
+        "tracking",
+        "league_points",
+        "prize_pool_accounting"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "normal_completion": {
+          "type": "string"
+        },
+        "rank_by": {
+          "type": "string"
+        },
+        "same_hand_bustouts": {
+          "type": "string"
+        },
+        "equal_pre_hand_stack_bustouts": {
+          "type": "string"
+        },
+        "successful_rebuy_is_elimination": {
+          "type": "boolean"
+        },
+        "tracking": {
+          "type": "string"
+        },
+        "league_points": {
+          "type": "boolean"
+        },
+        "prize_pool_accounting": {
+          "type": "boolean"
+        }
+      }
+    },
+    "references": {
+      "type": "object",
+      "required": [
+        "basic_game",
+        "standard_betting_and_button_procedures",
+        "simultaneous_elimination",
+        "hand_rankings"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "basic_game": {
+          "type": "string",
+          "pattern": "^https://"
+        },
+        "standard_betting_and_button_procedures": {
+          "type": "string",
+          "pattern": "^https://"
+        },
+        "simultaneous_elimination": {
+          "type": "string",
+          "pattern": "^https://"
+        },
+        "hand_rankings": {
+          "type": "string",
+          "pattern": "^https://"
+        }
+      }
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Texas hold'em house rules (test fixture schema)",
+  "description": "Schema for tests/fixtures/texas-holdem-house-rules.json, the OurPoker house rules. Test data for rules-settings; a recipe supplies its own."
+}

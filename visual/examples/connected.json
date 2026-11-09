@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "id": "rules-settings-connected",
+  "title": "Rules settings: connected consumer",
+  "status": "example",
+  "view": "component",
+  "focus": "component",
+  "definitions": [
+    {
+      "id": "ourapps-ae.rules-settings",
+      "name": "Rules settings",
+      "kind": "component",
+      "status": "example",
+      "package": "ourapps-ae/rules-settings",
+      "version": "0.3.0",
+      "ports": [
+        {
+          "id": "rules-settings",
+          "name": "Rules settings",
+          "direction": "output",
+          "kind": "interface",
+          "type": "ae/rules-settings",
+          "version": "1.0.0"
+        }
+      ],
+      "settings": [
+        {
+          "id": "rulesFile",
+          "name": "Rulesfile",
+          "type": "string",
+          "required": false,
+          "secret": false,
+          "default": "house-rules"
+        },
+        {
+          "id": "strict",
+          "name": "Strict",
+          "type": "boolean",
+          "required": false,
+          "secret": false,
+          "default": true
+        }
+      ]
+    },
+    {
+      "id": "consumer",
+      "name": "Example application consumer",
+      "kind": "application",
+      "status": "example",
+      "revision": "0.1.0",
+      "ports": [
+        {
+          "id": "rules-settings",
+          "name": "Rules settings",
+          "direction": "input",
+          "kind": "interface",
+          "type": "ae/rules-settings",
+          "version": "1.0.0",
+          "required": true,
+          "cardinality": "one"
+        }
+      ],
+      "settings": []
+    }
+  ],
+  "instances": [
+    {
+      "id": "component",
+      "name": "Rules settings",
+      "definition": "ourapps-ae.rules-settings",
+      "configuration": {}
+    },
+    {
+      "id": "consumer",
+      "name": "Example consumer",
+      "definition": "consumer",
+      "configuration": {}
+    }
+  ],
+  "connections": [
+    {
+      "source": {
+        "instance": "component",
+        "port": "rules-settings"
+      },
+      "target": {
+        "instance": "consumer",
+        "port": "rules-settings"
+      }
+    }
+  ]
+}
