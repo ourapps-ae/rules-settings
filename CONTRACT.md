@@ -19,10 +19,10 @@ The installer collects two settings. `rulesFile` is the name of the rules file t
 - `implementation/web/schema.ts` -> `components/rules-settings/web/schema.ts`
 
 Dependencies: none.
-`tools.lock.json` pins verification tools: node 26.5.0. Licence wording remains deferred.
+`tools.lock.json` pins verification tools: node 26.5.0. Licence: `Apache-2.0` (`LICENCE`, `NOTICE`).
 
 ## Provided interfaces
-- `interfaces/rules-settings.json` defines `rules-settings` (ae/rules-settings) version 1.0.0.
+- `interfaces/rules-settings.json` defines `rules-settings` (ae/rules-settings) version 1.0.0: an OpenRPC 1.3.2 document, one method per function (a member of a created object is `<Type>.<member>`), with parameter, result and data types as JSON Schema 2020-12 (`components.schemas`) and thrown errors under `errors`.
 
 ## Required interfaces
 None.

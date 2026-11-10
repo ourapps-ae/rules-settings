@@ -1,173 +1,24 @@
 {
-  "format": 1,
-  "kind": "component",
-  "identity": {
-    "name": "ourapps-ae/rules-settings",
-    "version": "0.3.0",
-    "sourceRevision": "19905b75dbea89fbfd424d67fe26c81aaed0e018",
-    "sourceTreeDigest": "0000000000000000000000000000000000000000000000000000000000000000",
-    "licenceStatus": "deferred"
-  },
-  "facilities": [
-    {
-      "id": "rules-settings",
-      "description": "Load and validate a rules file, read rules by path, list rules for a page"
-    }
-  ],
-  "documents": {
-    "contract": "CONTRACT.md",
-    "interfaces": [
-      "interfaces/rules-settings.json",
-      "suitability.json"
-    ],
-    "examples": [
-      "examples/consumer.ts"
-    ],
-    "licenceNotice": "LICENCE"
-  },
-  "collect": [
-    {
-      "id": "rulesFile",
-      "type": "string",
-      "grammar": "slug",
-      "required": false,
-      "secret": false,
-      "default": "house-rules"
-    },
-    {
-      "id": "strict",
-      "type": "boolean",
-      "grammar": "boolean",
-      "required": false,
-      "secret": false,
-      "default": true
-    }
-  ],
-  "files": [
-    {
-      "path": "CONTRACT.md",
-      "executable": false
-    },
-    {
-      "path": "INSTRUCTIONS.md",
-      "executable": false
-    },
-    {
-      "path": "LICENCE",
-      "executable": false
-    },
-    {
-      "path": "SOURCE.md",
-      "executable": false
-    },
-    {
-      "path": "examples/consumer.ts",
-      "executable": false
-    },
-    {
-      "path": "implementation/server/rules-settings.schema.json",
-      "executable": false
-    },
-    {
-      "path": "implementation/server/rules.ts",
-      "executable": false
-    },
-    {
-      "path": "implementation/web/schema.ts",
-      "executable": false
-    },
-    {
-      "path": "interfaces/rules-settings.json",
-      "executable": false
-    },
-    {
-      "path": "suitability.json",
-      "executable": false
-    },
-    {
-      "path": "tests/fixtures/bad-rules.json",
-      "executable": false
-    },
-    {
-      "path": "tests/fixtures/texas-holdem-house-rules.json",
-      "executable": false
-    },
-    {
-      "path": "tests/fixtures/texas-holdem-house-rules.schema.json",
-      "executable": false
-    },
-    {
-      "path": "tests/web.test.ts",
-      "executable": false
-    },
-    {
-      "path": "tools.lock.json",
-      "executable": false
-    },
-    {
-      "path": "visual/definition.json",
-      "executable": false
-    },
-    {
-      "path": "visual/examples/connected.json",
-      "executable": false
-    },
-    {
-      "path": "visual/output/connected.png",
-      "executable": false
-    },
-    {
-      "path": "visual/output/connected.svg",
-      "executable": false
-    },
-    {
-      "path": "visual/output/description.md",
-      "executable": false
-    }
-  ],
   "artefacts": [
     {
-      "source": "implementation/server/rules-settings.schema.json",
       "destination": "components/rules-settings/server/rules-settings.schema.json",
-      "template": false,
-      "executable": false
+      "executable": false,
+      "source": "implementation/server/rules-settings.schema.json",
+      "template": false
     },
     {
-      "source": "implementation/server/rules.ts",
       "destination": "components/rules-settings/server/rules.ts",
-      "template": false,
-      "executable": false
+      "executable": false,
+      "source": "implementation/server/rules.ts",
+      "template": false
     },
     {
-      "source": "implementation/web/schema.ts",
       "destination": "components/rules-settings/web/schema.ts",
-      "template": false,
-      "executable": false
+      "executable": false,
+      "source": "implementation/web/schema.ts",
+      "template": false
     }
   ],
-  "dependencies": [],
-  "provides": [
-    {
-      "id": "rules-settings",
-      "type": "ae/rules-settings",
-      "version": "1.0.0",
-      "path": "interfaces/rules-settings.json"
-    }
-  ],
-  "requires": [],
-  "visual": {
-    "definition": "visual/definition.json",
-    "examples": [
-      "visual/examples/connected.json"
-    ],
-    "outputs": [
-      "visual/output/connected.svg",
-      "visual/output/connected.png"
-    ],
-    "descriptions": [
-      "visual/output/description.md"
-    ]
-  },
   "capabilities": {
     "hosts": [],
     "secrets": [],
@@ -177,42 +28,195 @@
       "components/rules-settings/web/schema.ts"
     ]
   },
+  "collect": [
+    {
+      "default": "house-rules",
+      "grammar": "slug",
+      "id": "rulesFile",
+      "required": false,
+      "secret": false,
+      "type": "string"
+    },
+    {
+      "default": true,
+      "grammar": "boolean",
+      "id": "strict",
+      "required": false,
+      "secret": false,
+      "type": "boolean"
+    }
+  ],
+  "dependencies": [],
+  "documents": {
+    "contract": "CONTRACT.md",
+    "examples": [
+      "examples/consumer.ts"
+    ],
+    "interfaces": [
+      "interfaces/rules-settings.json",
+      "suitability.json"
+    ],
+    "licenceNotice": "LICENCE"
+  },
+  "facilities": [
+    {
+      "description": "Load and validate a rules file, read rules by path, list rules for a page",
+      "id": "rules-settings"
+    }
+  ],
+  "files": [
+    {
+      "executable": false,
+      "path": "CONTRACT.md"
+    },
+    {
+      "executable": false,
+      "path": "INSTRUCTIONS.md"
+    },
+    {
+      "executable": false,
+      "path": "LICENCE"
+    },
+    {
+      "executable": false,
+      "path": "NOTICE"
+    },
+    {
+      "executable": false,
+      "path": "SOURCE.md"
+    },
+    {
+      "executable": false,
+      "path": "examples/consumer.ts"
+    },
+    {
+      "executable": false,
+      "path": "implementation/server/rules-settings.schema.json"
+    },
+    {
+      "executable": false,
+      "path": "implementation/server/rules.ts"
+    },
+    {
+      "executable": false,
+      "path": "implementation/web/schema.ts"
+    },
+    {
+      "executable": false,
+      "path": "interfaces/rules-settings.json"
+    },
+    {
+      "executable": false,
+      "path": "suitability.json"
+    },
+    {
+      "executable": false,
+      "path": "tests/fixtures/bad-rules.json"
+    },
+    {
+      "executable": false,
+      "path": "tests/fixtures/texas-holdem-house-rules.json"
+    },
+    {
+      "executable": false,
+      "path": "tests/fixtures/texas-holdem-house-rules.schema.json"
+    },
+    {
+      "executable": false,
+      "path": "tests/web.test.ts"
+    },
+    {
+      "executable": false,
+      "path": "tools.lock.json"
+    },
+    {
+      "executable": false,
+      "path": "visual/definition.json"
+    },
+    {
+      "executable": false,
+      "path": "visual/examples/connected.json"
+    },
+    {
+      "executable": false,
+      "path": "visual/output/connected.png"
+    },
+    {
+      "executable": false,
+      "path": "visual/output/connected.svg"
+    },
+    {
+      "executable": false,
+      "path": "visual/output/description.md"
+    }
+  ],
+  "format": 1,
+  "identity": {
+    "licence": "Apache-2.0",
+    "name": "ourapps-ae/rules-settings",
+    "sourceRevision": "19905b75dbea89fbfd424d67fe26c81aaed0e018",
+    "sourceTreeDigest": "0000000000000000000000000000000000000000000000000000000000000000",
+    "version": "0.4.0"
+  },
   "infrastructure": {
     "accounts": [],
     "costStatus": "unmeasured",
     "deployedReason": "No deployed service; injected resources and local library functions only."
   },
+  "kind": "component",
+  "provides": [
+    {
+      "id": "rules-settings",
+      "path": "interfaces/rules-settings.json",
+      "type": "ae/rules-settings",
+      "version": "1.0.0"
+    }
+  ],
+  "requires": [],
+  "upgrade": {
+    "migration": "files-only",
+    "policy": "patch"
+  },
   "verification": [
     {
-      "id": "web",
-      "root": "package",
       "argv": [
         "node",
         "--test",
         "tests/web.test.ts"
       ],
       "cwd": ".",
-      "prepare": [],
-      "tools": {
-        "node": "26.5.0"
-      },
+      "expectedExit": 0,
       "fixtures": [
         "tests/fixtures/bad-rules.json",
         "tests/fixtures/texas-holdem-house-rules.json",
         "tests/fixtures/texas-holdem-house-rules.schema.json"
       ],
+      "id": "web",
       "locks": [
         "tools.lock.json"
       ],
       "network": false,
-      "timeoutSeconds": 120,
-      "expectedExit": 0,
+      "prepare": [],
+      "requirements": [],
+      "root": "package",
       "scope": "required-local",
-      "requirements": []
+      "timeoutSeconds": 120,
+      "tools": {
+        "node": "26.5.0"
+      }
     }
   ],
-  "upgrade": {
-    "policy": "patch",
-    "migration": "files-only"
+  "visual": {
+    "definition": "visual/definition.json",
+    "descriptions": [
+      "visual/output/description.md"
+    ],
+    "examples": [
+      "visual/examples/connected.json"
+    ],
+    "outputs": [
+      "visual/output/connected.svg",
+      "visual/output/connected.png"
+    ]
   }
 }
