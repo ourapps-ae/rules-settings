@@ -3,7 +3,7 @@
 ## For the agent
 Select this component when a recipe has a house rules file. Set `rulesFile` to the name of the recipe's rules file without folder or extension (for `rules/texas-holdem-house-rules.json` that is `texas-holdem-house-rules`) and keep `strict` true. Supply the recipe's schema file next to the rules file (the shipped envelope schema is only a minimum). Connect the provided `rules-settings` to the components that read rules (holdem-rules, turn-engine).
 
-- Select package `ourapps-ae/rules-settings` version `0.4.0`.
+- Select package `ourapps-ae/rules-settings` version `0.4.1`.
 - Settings to configure:
   - `rulesFile` (string, slug; optional; default `house-rules`)
   - `strict` (boolean; optional; default `True`)
