@@ -19,7 +19,7 @@ The installer collects two settings. `rulesFile` is the name of the rules file t
 - `implementation/web/schema.ts` -> `components/rules-settings/web/schema.ts`
 
 Dependencies: none.
-`tools.lock.json` pins verification tools: node 26.5.0. Licence: `Apache-2.0` (`LICENCE`, `NOTICE`).
+`tools.lock.json` pins verification tools: node 26.5. Licence: `Apache-2.0` (`LICENCE`, `NOTICE`).
 
 ## Provided interfaces
 - `interfaces/rules-settings.json` defines `rules-settings` (ae/rules-settings) version 1.0.0: an OpenRPC 1.3.2 document, one method per function (a member of a created object is `<Type>.<member>`), with parameter, result and data types as JSON Schema 2020-12 (`components.schemas`) and thrown errors under `errors`.
@@ -39,7 +39,7 @@ No deployed service and no accounts. The rules file and schema ship with the app
 ## Verification
 `tests/web.test.ts` loads the OurPoker house rules from `tests/fixtures/texas-holdem-house-rules.json` (test data only) and checks them against `tests/fixtures/texas-holdem-house-rules.schema.json`, then mutates them: wrong type, out-of-range number, bad enum, missing field, bad pattern, unknown field in strict mode and null only where allowed. It also tests the other keywords, refusal of unusable schemas, frozen results, path lookups, rule rows with descriptions, loading from disk and the startup error message, `value(path)` (present, missing, deep, indexed), the file-name convention and its refusal of names that could leave the folder, and loading by name.
 
-- `node --test tests/web.test.ts` (web, required-local; tools: node 26.5.0)
+- `node --test tests/web.test.ts` (web, required-local; tools: node 26.5)
 
 ## Scenarios and presentation
 A hold'em game whose engine and rules page read the same file. A second game with its own rules file and schema using the same loader. An agent edits the rules file; the next start rejects a typo with the exact path. A client shows the rules table without a copy of the numbers.
