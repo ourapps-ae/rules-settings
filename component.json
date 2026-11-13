@@ -1,6 +1,12 @@
 {
   "artefacts": [
     {
+      "destination": "components/rules-settings/server/index.ts",
+      "executable": false,
+      "source": "implementation/server/index.ts",
+      "template": false
+    },
+    {
       "destination": "components/rules-settings/server/rules-settings.schema.json",
       "executable": false,
       "source": "implementation/server/rules-settings.schema.json",
@@ -10,6 +16,12 @@
       "destination": "components/rules-settings/server/rules.ts",
       "executable": false,
       "source": "implementation/server/rules.ts",
+      "template": false
+    },
+    {
+      "destination": "components/rules-settings/web/index.ts",
+      "executable": false,
+      "source": "implementation/web/index.ts",
       "template": false
     },
     {
@@ -23,8 +35,10 @@
     "hosts": [],
     "secrets": [],
     "writes": [
+      "components/rules-settings/server/index.ts",
       "components/rules-settings/server/rules-settings.schema.json",
       "components/rules-settings/server/rules.ts",
+      "components/rules-settings/web/index.ts",
       "components/rules-settings/web/schema.ts"
     ]
   },
@@ -91,11 +105,19 @@
     },
     {
       "executable": false,
+      "path": "implementation/server/index.ts"
+    },
+    {
+      "executable": false,
       "path": "implementation/server/rules-settings.schema.json"
     },
     {
       "executable": false,
       "path": "implementation/server/rules.ts"
+    },
+    {
+      "executable": false,
+      "path": "implementation/web/index.ts"
     },
     {
       "executable": false,
