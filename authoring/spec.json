@@ -1,6 +1,6 @@
 {
   "name": "rules-settings",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "title": "Rules settings",
   "description": "House rules kept in one checked settings file that the game and the rules page both read: a loader, a JSON-schema-style validator with a schema file, typed lookups by path, and rows for a rules page.",
   "facilities": [
